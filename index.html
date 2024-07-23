@@ -1,59 +1,70 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+        <title>Taco App</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <div class="container">
-            <header>
-                <!-- <img class="hero-img" src="./images/amie-watson-qeVpw7i2Wi0-unsplash.jpg" alt="Delicious tacos on a chopping board in front of a bottle of Jarrito"> -->
-                <h1 class="company-header">TacObs</h1>
-                <p class="company-slogan">The best tacos outside of Mexico!</p>
-            </header>
-            <main>
-              <section class="item-container">
-                  <!-- <img class="item-img" src="./images/pizza.jpg" alt="Pizza slice graphic"> -->
-                  <p class="item-graphic">🌮</p>
-                  <div class="item-information">
-                      <h2 class="item-name">Tacos</h2>
-                      <p class="item-ingredients">pepperoni, mushroom, mozarella</p>
-                      <p class="item-price">$14</p>
-                  </div>
-                  <button class="item-btn">+</button>
-              </section>
-              <section class="order-container">
-                  <h2 class="order-header">Your order</h2>
-                  <div class="order-item-container">
-                      <p class="order-label">Tacos</p>
-                      <button class="remove-order-btn">remove</button>
-                      <p class="order-price">$14</p>
-                  </div>
-                  <div class="total-price-container">
-                      <p class="order-label">Total price:</p>
-                      <p class="order-price">$14</p>
-                  </div>
-                  <button class="complete-order-btn">Complete Order</button>
-              </section>
-              <div class="payment-container">
-                  <h2 class="payment-header">Enter card details</h2>
-                  <form>
-                      <input type="input" placeholder="Enter your name">
-                      <input type="input" placeholder="Enter your number">
-                      <input type="password" placeholder="Enter your CVV">
-                      <button class="pay-btn">Pay</button>
-                  </form>
+          <header>
+              <div class="container">
+                  <!-- <img class="hero-img" src="./images/amie-watson-qeVpw7i2Wi0-unsplash.jpg" alt="Delicious tacos on a chopping board in front of a bottle of Jarrito"> -->
+                  <h1 class="company-header">TacObs</h1>
+                  <p class="company-slogan">The best tacos outside of Mexico!</p>
               </div>
-              <section>
-                  <div class="confirmation-container">
-                      <p class="confirmation-text">Thanks, James! Your order is on its way!</p>
-                  </div>
-              </section>
-              
-          </main>
-        </div>
+          </header>
+          <main>
+            <div class="container">
+                <section class="item-container">
+                    <!-- <img class="item-img" src="./images/pizza.jpg" alt="Pizza slice graphic"> -->
+                    <p class="item-graphic">🌮</p>
+                    <!-- <img class="item-example-image" src="./images/amie-watson-qeVpw7i2Wi0-unsplash.jpg"> -->
+                    <div class="item-information">
+                        <h2 class="item-name">Tacos</h2>
+                        <p class="item-ingredients">pepperoni, mushroom, mozarella</p>
+                        <p class="item-price">$14</p>
+                    </div>
+                    <button class="item-btn">+</button>
+                </section>
+                <section class="order-container">
+                    <h2 class="order-header">Your order</h2>
+                    <div class="order-item-container">
+                        <p class="order-label">Tacos</p>
+                        <button class="remove-order-btn">remove</button>
+                        <p class="order-price">$14</p>
+                    </div>
+                    <div class="total-price-container">
+                        <p class="order-label">Total price:</p>
+                        <p class="order-price">$14</p>
+                    </div>
+                    <button class="complete-order-btn">Complete Order</button>
+                </section>
+                <div class="payment-container">
+                    <h2 class="payment-header">Enter card details</h2>
+                    <form>
+                        <input type="input" placeholder="Enter your name">
+                        <input type="input" placeholder="Enter your number">
+                        <input type="password" placeholder="Enter your CVV">
+                        <button class="pay-btn">Pay</button>
+                    </form>
+                </div>
+                <section>
+                    <div class="confirmation-container">
+                        <p class="confirmation-text">Thanks, James! Your order is on its way!</p>
+                    </div>
+                </section>
+                <section class="review-stars">
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </section>
+            </div>
+        </main>
 	      <script src="index.js"></script>
     </body>
 </html>
