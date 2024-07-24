@@ -1,9 +1,9 @@
-const menuArray = [
+export const menuArray = [
     {
         name: "Tacos",
-        ingredients: ["pepperoni", "mushrom", "mozarella"],
+        ingredients: ["fish", "salsa", "guacamole"],
         id: 0,
-        price: 14,
+        price: 8,
         emoji: "🌮"
     },
     {
@@ -16,7 +16,7 @@ const menuArray = [
         {
         name: "Beer",
         ingredients: ["grain, hops, yeast, water"],
-        price: 12,
+        price: 6,
         emoji: "🍺",
         id: 2
     }
