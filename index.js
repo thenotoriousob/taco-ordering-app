@@ -45,14 +45,25 @@ function Order(id, name, price) {
   }
 }
 
-function Discount(name, value) {
-    this.name = name
-    this.value = value
-    this.noOfDiscounts = 0
-    this.setNoOfDiscounts = function(noOfDiscounts) {
-        // console.log("setdiscount", noOfDiscounts);
-        this.noOfDiscounts = noOfDiscounts;
-    }
+function Discount(id, name, discount, type, qualifyingAmount) {
+    this.id = id
+    this.name = name;
+    this.discount = discount;
+    this.type = type;
+    this.qualifyingAmount = qualifyingAmount;
+    this.qualified = false;
+    this.totalDiscount = 0;
+    this.hadQualified = function(hasQualified) {
+        this.qualified = hasQualified;
+    };
+    this.setTotalDiscount = function(totalDiscount) {
+      this.totalDiscount = totalDiscount;
+  };
+    // this.noOfDiscounts = 0
+    // this.setNoOfDiscounts = function(noOfDiscounts) {
+    //     // console.log("setdiscount", noOfDiscounts);
+    //     this.noOfDiscounts = noOfDiscounts;
+    // }
 }
 
 /* Create an order object for each item on the menu, we will only display
@@ -60,6 +71,10 @@ function Discount(name, value) {
 menuArray.forEach(item => {
     orderedItems.push(new Order (item.id, item.name, item.price));
 })
+
+discounts.push(new Discount(0, "10% off $30 spend", 10, "percent", 30));
+discounts.push(new Discount(1, "15% off $40 spend", 15, "percent", 40));
+discounts.push(new Discount(2, "$10 off $50 spend", 10, "value", 50));
 
 function handleAddItemClick(itemId) {
 
@@ -105,35 +120,20 @@ function handleReviewClick(stars) {
     confirmationContainerEl[0].style.display = "none";
 }
 
-function hasQualifiedForDiscount() {
-
-    const discount = 10;
-    /* The easiest thing would be to update the menuArray but on a previous
-      project I was told not to do that incase it was an api I was working with instead.
-      Can't think of any other way of doing it */
-    const tacoID = 0;
-    const burritoID = 1;
-    const beerID = 2;
-
-    let noOfTacos = 0;
-    let noOfBurritos = 0;
-    let noOfDrinks = 0;
-
-    if (discounts.length === 0) {
-        discounts.push(new Discount("10% taco and beer discount **", 10));
-        discounts.push(new Discount("10% burrito and beer discount **", 10));
-    }
-
-    orderedItems.forEach(item => {
-        noOfTacos += item.id === tacoID && item.ordered;
-        noOfBurritos += item.id === burritoID && item.ordered;
-        noOfDrinks += item.id === beerID && item.ordered;
+function hasQualifiedForDiscount(totalPrice) {
+    return discounts.sort((a, b) => a.qualifyingAmount - b.qualifyingAmount).reverse().find(discount => {
+        if (totalPrice >= discount.qualifyingAmount) {
+            switch (discount.type) {
+                case "percent":
+                    discount.setTotalDiscount(((totalPrice / 100) * discount.discount).toFixed(2));
+                    break;
+                case "value":
+                    discount.setTotalDiscount(discount.discount);
+                    break;
+            }
+            return true;
+        }
     });
-
-    
-    /* The number of discounts will be the lowest number out of food and drinks bought */
-    discounts[0].setNoOfDiscounts(Math.min(noOfTacos, noOfDrinks))
-    discounts[1].setNoOfDiscounts(Math.min(noOfBurritos, noOfDrinks - noOfTacos))
 }
 
 function renderOrderedItems() {
@@ -143,6 +143,7 @@ function renderOrderedItems() {
     const totalPriceEl = document.getElementById("total-price");
     
     let itemOrdered = false;
+    let totalDiscount = 0;
 
     orderedItemsEl.innerHTML = "";
 
@@ -165,29 +166,25 @@ function renderOrderedItems() {
 
     if (itemOrdered) {
 
-        // hasQualifiedForDiscount();
-
-        // discounts.forEach(discount => {
-
-        //     orderedItemsEl.innerHTML += discount.noOfDiscounts > 0 ?
-        //     `
-        //     <div class="order-item-card">
-        //         <p class="order-label">${discount.name} ${discount.noOfDiscounts > 0 ? `x ${discount.noOfDiscounts}` : ''}</p>
-        //         <p class="order-price">$${discount.amount * discount.noOfDiscounts}</p>
-        //     </div>
-        //     `
-        //     : ''
-        // })
-
         const totalPrice = orderedItems.reduce((total, currentItem) => {
             return total + (currentItem.price * currentItem.ordered);
         },0);
-        // const totalDiscount = discounts.reduce((total, currentDiscount) => {
-        //     return total + (currentDiscount.value * currentDiscount.noOfDiscounts);
-        // },0);
+
+        const qualifiedDiscount = hasQualifiedForDiscount(totalPrice);
+
+        if (qualifiedDiscount) {
+            orderedItemsEl.innerHTML += 
+            `
+            <div class="order-item-card">
+                <p class="order-label">${qualifiedDiscount.name}</p>
+                <p class="order-price">$${qualifiedDiscount.totalDiscount}</p>
+            </div>
+            `;
+            totalDiscount = qualifiedDiscount.totalDiscount;
+        }
 
         orderContainerEl[0].style.display = "block";
-        totalPriceEl.innerText = `$${totalPrice}`;
+        totalPriceEl.innerText = `$${(totalPrice - totalDiscount).toFixed(2)}`;
     } else {
         orderContainerEl[0].style.display = "none";
     }
