@@ -141,8 +141,11 @@ function renderOrderedItems() {
     const orderedItemsEl = document.getElementById("ordered-items");
     const orderContainerEl = document.getElementsByClassName("order-container");
     const totalPriceEl = document.getElementById("total-price");
+    
+    let itemOrdered = false;
 
     orderedItemsEl.innerHTML = "";
+
     orderedItems.forEach(item => {
 
         orderedItemsEl.innerHTML += item.ordered > 0 ?
@@ -153,32 +156,41 @@ function renderOrderedItems() {
             <p class="order-price">$${item.price * item.ordered}</p>
         </div>
         `
-        : ''
+        : '';
+
+        if (!itemOrdered && item.ordered > 0) {
+            itemOrdered = true;
+        };
     });
 
-    // hasQualifiedForDiscount();
+    if (itemOrdered) {
 
-    // discounts.forEach(discount => {
+        // hasQualifiedForDiscount();
 
-    //     orderedItemsEl.innerHTML += discount.noOfDiscounts > 0 ?
-    //     `
-    //     <div class="order-item-card">
-    //         <p class="order-label">${discount.name} ${discount.noOfDiscounts > 0 ? `x ${discount.noOfDiscounts}` : ''}</p>
-    //         <p class="order-price">$${discount.amount * discount.noOfDiscounts}</p>
-    //     </div>
-    //     `
-    //     : ''
-    // })
+        // discounts.forEach(discount => {
 
-    const totalPrice = orderedItems.reduce((total, currentItem) => {
-        return total + (currentItem.price * currentItem.ordered);
-    },0);
-    // const totalDiscount = discounts.reduce((total, currentDiscount) => {
-    //     return total + (currentDiscount.value * currentDiscount.noOfDiscounts);
-    // },0);
+        //     orderedItemsEl.innerHTML += discount.noOfDiscounts > 0 ?
+        //     `
+        //     <div class="order-item-card">
+        //         <p class="order-label">${discount.name} ${discount.noOfDiscounts > 0 ? `x ${discount.noOfDiscounts}` : ''}</p>
+        //         <p class="order-price">$${discount.amount * discount.noOfDiscounts}</p>
+        //     </div>
+        //     `
+        //     : ''
+        // })
 
-    orderContainerEl[0].style.display = "block";
-    totalPriceEl.innerText = `$${totalPrice}`;
+        const totalPrice = orderedItems.reduce((total, currentItem) => {
+            return total + (currentItem.price * currentItem.ordered);
+        },0);
+        // const totalDiscount = discounts.reduce((total, currentDiscount) => {
+        //     return total + (currentDiscount.value * currentDiscount.noOfDiscounts);
+        // },0);
+
+        orderContainerEl[0].style.display = "block";
+        totalPriceEl.innerText = `$${totalPrice}`;
+    } else {
+        orderContainerEl[0].style.display = "none";
+    }
 
 }
 
