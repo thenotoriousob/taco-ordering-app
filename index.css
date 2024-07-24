@@ -6,11 +6,15 @@
 }
 
 body {
-    font-family: "Symthe", sans-serif;
+    font-family: "Smythe", sans-serif;
 }
 
-p {
+p, input {
     line-height: 1.5;
+}
+
+button {
+    cursor: pointer;
 }
 
 .container {
@@ -20,6 +24,7 @@ p {
     margin: 0 auto;
     /* Stop collapsing margins */
     padding-bottom: 1px;
+    padding-top: 1px;
 }
 
 /* Header styling */
@@ -30,29 +35,49 @@ header {
     min-height: 200px;
     padding: 1px;
     color: #FFFFFF;
-    text-shadow: 0px 0px 5px black;
+    /* text-shadow: 0.07em 0 black,
+                  0 0.07em black,
+                  -0.07em 0 black,
+                  0 -0.07em black; */
+                  text-shadow:
+        0.05em 0 black,
+        0 0.05em black,
+        -0.05em 0 black,
+        0 -0.05em black,
+        -0.05em -0.05em black,
+        -0.05em 0.05em black,
+        0.05em -0.05em black,
+        0.05em 0.05em black;
 
+}
+
+.header-container {
+    margin-top: 1.2em;
+    text-align: center;
 }
 
 .company-header {
-    font-size: 2.375rem;
-    margin: 1.2em 1.2em 0.5em 1.2em;
+    font-size: 6rem;
+    margin: 0;
 }
 
 .company-slogan {
-    font-size: 1.375rem;
-    margin-left: 1.2em;
+    font-size: 2rem;
 }
 
 /* Item styling */
 .item-container {
+    margin: 0 auto 3em;
+}
+
+.item-card {
     display: flex;
-    /* justify-content: space-around; */
     align-items: center;
-    margin: 4.375em auto;
+    margin: 0 auto;
     color: #000000;
     border-bottom: 1px solid #D2D2D2;
-    width: 80%;
+    width: 90%;
+    padding-top: 3em;
     padding-bottom: 3em;
 }
 
@@ -95,24 +120,33 @@ header {
 
 /* Order styling */
 .order-container {
+    display: none;
+    width: 90%;
+    margin: 0 auto 3em;
+}
+
+/* .order-container-flex {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
-    margin: 0 auto 3em;
-}
+} */
 
 .order-header {
     font-size: 1.75rem;
     margin-bottom: 2.25em;
+    text-align: center;
 }
 
 .order-item-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
   border-bottom: 2px solid #393333;
-  padding: 2rem 0;
+  padding-bottom: 2em;
+}
+
+.order-item-card {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.75rem;
 }
 
 .remove-order-btn {
@@ -127,8 +161,9 @@ header {
 .total-price-container {
     display: flex;
     justify-content: space-between;
-    margin: 1em 0 3.25em;
     width: 100%;
+    font-size: 1.75rem;
+    margin: 0.5em 0 1.75em;
 }
 
 .complete-order-btn {
@@ -145,18 +180,28 @@ header {
 
 /* Payment form styling */
 .payment-container {
-    /* display: none; */
+    display: none;
     padding: 1.5em;
-    width: 80%;
-    margin: 0 auto;
-    text-align: center;
+    width: 90%;
+    margin: auto;
+    max-width: 575px;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 200px 50px rgba(0,0,0,.5);
+    border-radius: 4px;
+    font-family: 'Verdana', sans-serif;
 }
 
 .payment-header {
     font-size: 1.5rem;
     margin-bottom: 2em;
+    text-align: center;
 }
-
 
 form {
     display: flex;
@@ -168,6 +213,8 @@ input {
     padding: 1em 1.5em 1em 1.5em;
     border-radius: 4px;
     margin-bottom: 1.5em;
+    font-family: 'Verdana', sans-serif;
+    font-size: 1.25em;
 }
 
 .pay-btn {
@@ -182,26 +229,84 @@ input {
 
 /* Confirmation styling */
 .confirmation-container {
-    width: 80%;
-    margin: 0 auto;
+    display: none;
+    width: 90%;
+    margin: 0 auto 3rem;
     background-color: #ECFDF5;
     color: #065F46;
     padding: 3em;
     border-radius: 3px;
+    text-align: center;
 }
 
 .confirmation-text {
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
-.star-checked {
+.rating-text {
+    font-size: 1.25rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* .star-checked {
     color: orange;
+} */
+
+.review-stars {
+    font-size: 3rem;
 }
 
-.review-stars:hover > span:before {
+/* .review-stars:hover > span:before {
   color: orange;
 }
 
 .review-stars > span:hover ~ span:before {
   color: black;
+} */
+
+/* These styles are applied by default.
+   They will also override the hover
+   style for all stars to the right
+   of the currently hovered star. */
+.rate span, .rate span:hover ~ span {
+    color: #222;
+    /* text-shadow: none;
+    transition: color 200ms,
+                text-shadow 200ms; */
+    /* This will remove the delay when
+       moving the cursor left or right
+       within the set of stars. */
+    /* transition-delay: 0; */
+}
+  
+.rate:hover span {
+    color: #fc0;
+}
+  
+  /* Make the effect apply one star at a
+     time. Limiting the selector to when
+     .rate is hovered removes the effect
+     without delay when cursor leaves
+     the .rate area. */
+.rate:hover span:nth-child(2) {
+    transition-delay: 30ms;
+}
+  
+.rate:hover span:nth-child(3) {
+    transition-delay: 60ms;
+}
+  
+.rate:hover span:nth-child(4) {
+    transition-delay: 90ms;
+}
+  
+.rate:hover span:nth-child(5) {
+    transition-delay: 120ms;
+}
+  
+  /* Miscellaneous styles. */
+.rate span {
+    cursor: pointer;
+    font-style: normal;
 }

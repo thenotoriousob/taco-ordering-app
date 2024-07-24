@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <title>Taco App</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
@@ -11,61 +11,53 @@
     <body>
           <header>
               <div class="container">
-                  <!-- <img class="hero-img" src="./images/amie-watson-qeVpw7i2Wi0-unsplash.jpg" alt="Delicious tacos on a chopping board in front of a bottle of Jarrito"> -->
-                  <h1 class="company-header">TacObs</h1>
-                  <p class="company-slogan">The best tacos outside of Mexico!</p>
+                  <div class="header-container">
+                      <h1 class="company-header">TacObs</h1>
+                      <p class="company-slogan">The best tacos outside of Mexico!</p>
+                  </div>
               </div>
           </header>
           <main>
             <div class="container">
-                <section class="item-container">
-                    <!-- <img class="item-img" src="./images/pizza.jpg" alt="Pizza slice graphic"> -->
-                    <p class="item-graphic">🌮</p>
-                    <!-- <img class="item-example-image" src="./images/amie-watson-qeVpw7i2Wi0-unsplash.jpg"> -->
-                    <div class="item-information">
-                        <h2 class="item-name">Tacos</h2>
-                        <p class="item-ingredients">pepperoni, mushroom, mozarella</p>
-                        <p class="item-price">$14</p>
-                    </div>
-                    <button class="item-btn">+</button>
+                <section class="item-container" id="food-items">
+                    <!-- Rendered from JS -->
                 </section>
                 <section class="order-container">
                     <h2 class="order-header">Your order</h2>
-                    <div class="order-item-container">
-                        <p class="order-label">Tacos</p>
-                        <button class="remove-order-btn">remove</button>
-                        <p class="order-price">$14</p>
+                    <div class="order-item-container" id="ordered-items">
+                        <!-- Rendered from JS -->
                     </div>
                     <div class="total-price-container">
                         <p class="order-label">Total price:</p>
-                        <p class="order-price">$14</p>
+                        <p class="order-price" id="total-price">$0</p>
                     </div>
-                    <button class="complete-order-btn">Complete Order</button>
+                    <button type="button" class="complete-order-btn" id="complete-order-btn">Complete Order</button>
                 </section>
-                <div class="payment-container">
-                    <h2 class="payment-header">Enter card details</h2>
-                    <form>
-                        <input type="input" placeholder="Enter your name">
-                        <input type="input" placeholder="Enter your number">
-                        <input type="password" placeholder="Enter your CVV">
-                        <button class="pay-btn">Pay</button>
-                    </form>
-                </div>
-                <section>
-                    <div class="confirmation-container">
-                        <p class="confirmation-text">Thanks, James! Your order is on its way!</p>
+                <section class="confirmation-container">
+                    <p class="confirmation-text">Thanks, <span id="order-name"></span>! Your order is on its way!</p>
+                    <p class="rating-text">Please rate your experience with us and help us improve</p>  
+                    <div class="review-stars">
+                        <span class="rate">
+                            <span class="stars" id="1star">★</span>
+                            <span class="stars" id="2stars">★</span>
+                            <span class="stars" id="3stars">★</span>
+                            <span class="stars" id="4stars">★</span>
+                            <span class="stars" id="5stars">★</span>
+                        </span>
                     </div>
-                </section>
-                <section class="review-stars">
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
                 </section>
             </div>
         </main>
-	      <script src="index.js"></script>
+        <div class="payment-container" id="payment-modal">
+            <h2 class="payment-header">Enter card details</h2>
+            <form id="payment-form">
+                <input type="input" name="name" placeholder="Enter your name" required>
+                <input type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" name="card" placeholder="Enter your number" required>
+                <input type="password" name="ccv" placeholder="Enter your CVV" maxlength="3" required>
+                <button class="pay-btn">Pay</button>
+            </form>
+        </div>
+	      <script src="index.js" type="module"></script>
     </body>
 </html>
 
