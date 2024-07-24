@@ -125,10 +125,10 @@ function hasQualifiedForDiscount(totalPrice) {
         if (totalPrice >= discount.qualifyingAmount) {
             switch (discount.type) {
                 case "percent":
-                    discount.setTotalDiscount(((totalPrice / 100) * discount.discount).toFixed(2));
+                    discount.setTotalDiscount(((totalPrice / 100) * -discount.discount).toFixed(2));
                     break;
                 case "value":
-                    discount.setTotalDiscount(discount.discount);
+                    discount.setTotalDiscount(-discount.discount);
                     break;
             }
             return true;
@@ -184,7 +184,7 @@ function renderOrderedItems() {
         }
 
         orderContainerEl[0].style.display = "block";
-        totalPriceEl.innerText = `$${(totalPrice - totalDiscount).toFixed(2)}`;
+        totalPriceEl.innerText = `$${(totalPrice + totalDiscount).toFixed(2)}`;
     } else {
         orderContainerEl[0].style.display = "none";
     }
