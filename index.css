@@ -182,17 +182,17 @@ header {
 .tips {
     font-size: 1rem;
     padding: 1.5em;
-    background-color: lightgreen;
-    border: 1px solid #16DB99;
+    background-color: #BBBBBB;
     border-radius: 4px;
     width: 20%;
     text-align: center;
     cursor: pointer;
     font-family: 'Verdana', sans-serif;
+    color: #FFFFFF;
 }
 
 .tips-selected,
-.tips:focus {
+.tips:hover {
     background-color: #16DB99;
     color: #FFFFFF;
 }
