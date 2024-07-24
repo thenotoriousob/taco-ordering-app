@@ -3,9 +3,12 @@ import { menuArray } from "./data.js";
 const paymentModal = document.getElementById("payment-modal");
 const payForm = document.getElementById("payment-form");
 const confirmationContainerEl = document.getElementsByClassName("confirmation-container");
+const tipEls = document.getElementsByClassName("tips");
 
-const orderedItems = [];
-const discounts = [];
+let orderedItems = [];
+let discounts = [];
+
+let tipPercentage = 0;
 
 document.addEventListener("click", (e) => {
     if (e.target.dataset.addItem) {
@@ -20,6 +23,14 @@ document.addEventListener("click", (e) => {
     else if(e.target.classList.value.includes("stars")) {
         handleReviewClick(e.target.id);
     }
+    else if(e.target.classList.value.includes("tips")) {
+
+        for (let element of tipEls) {
+            e.target.id === element.id ? element.classList.add("tips-selected") : element.classList.remove("tips-selected");
+        };
+
+        handleTipClick(e.target.id);
+    }
     else if(!e.target.closest('.payment-container') && e.target.id !== "complete-order-btn") {
         paymentModal.style.display = 'none'
     }
@@ -30,6 +41,8 @@ payForm.addEventListener("submit", (e) => {
 
     handlePaymentSubmit();
 });
+
+resetForm();
 
 // Create an Order object to store what has been ordered
 function Order(id, name, price) {
@@ -57,24 +70,9 @@ function Discount(id, name, discount, type, qualifyingAmount) {
         this.qualified = hasQualified;
     };
     this.setTotalDiscount = function(totalDiscount) {
-      this.totalDiscount = totalDiscount;
+      this.totalDiscount = Number(totalDiscount.toFixed(2));
   };
-    // this.noOfDiscounts = 0
-    // this.setNoOfDiscounts = function(noOfDiscounts) {
-    //     // console.log("setdiscount", noOfDiscounts);
-    //     this.noOfDiscounts = noOfDiscounts;
-    // }
 }
-
-/* Create an order object for each item on the menu, we will only display
-   those where the number ordered is greater than 1 */
-menuArray.forEach(item => {
-    orderedItems.push(new Order (item.id, item.name, item.price));
-})
-
-discounts.push(new Discount(0, "10% off $30 spend", 10, "percent", 30));
-discounts.push(new Discount(1, "15% off $40 spend", 15, "percent", 40));
-discounts.push(new Discount(2, "$10 off $50 spend", 10, "value", 50));
 
 function handleAddItemClick(itemId) {
 
@@ -90,6 +88,24 @@ function handleRemoveItemClick(itemId) {
     const orderedItem = orderedItems.filter(item => item.id === itemId)[0];
 
     orderedItem.decrementOrdered();
+
+    renderOrderedItems();
+}
+
+function handleTipClick(tipId) {
+    switch (tipId) {
+        case "10%":
+            tipPercentage = 10;
+            break;
+        case "15%":
+            tipPercentage = 15;
+            break;
+        case "20%":
+            tipPercentage = 20;
+            break;
+        default:
+            tipPercentage = 0;
+    }
 
     renderOrderedItems();
 }
@@ -117,7 +133,7 @@ function handleReviewClick(stars) {
     // Do something with the review!
     console.log(stars);
 
-    confirmationContainerEl[0].style.display = "none";
+    resetForm();
 }
 
 function hasQualifiedForDiscount(totalPrice) {
@@ -125,7 +141,7 @@ function hasQualifiedForDiscount(totalPrice) {
         if (totalPrice >= discount.qualifyingAmount) {
             switch (discount.type) {
                 case "percent":
-                    discount.setTotalDiscount(((totalPrice / 100) * -discount.discount).toFixed(2));
+                    discount.setTotalDiscount(((totalPrice / 100) * -discount.discount));
                     break;
                 case "value":
                     discount.setTotalDiscount(-discount.discount);
@@ -177,14 +193,16 @@ function renderOrderedItems() {
             `
             <div class="order-item-card">
                 <p class="order-label">${qualifiedDiscount.name}</p>
-                <p class="order-price">$${qualifiedDiscount.totalDiscount}</p>
+                <p class="order-price">$${qualifiedDiscount.totalDiscount.toFixed(2)}</p>
             </div>
             `;
             totalDiscount = qualifiedDiscount.totalDiscount;
         }
 
+        const tip = ((totalPrice + totalDiscount) / 100) * tipPercentage;
+
         orderContainerEl[0].style.display = "block";
-        totalPriceEl.innerText = `$${(totalPrice + totalDiscount).toFixed(2)}`;
+        totalPriceEl.innerText = `$${(totalPrice + totalDiscount + tip).toFixed(2)}`;
     } else {
         orderContainerEl[0].style.display = "none";
     }
@@ -221,6 +239,28 @@ function renderConfirmationMessage(name) {
     orderContainerEl[0].style.display = "none";
     confirmationContainerEl[0].style.display = "block";
     orderNameEl.innerText = name;
+}
+
+function resetForm() {
+
+    orderedItems = [];
+    discounts = [];
+    tipPercentage = 0;
+    /* Create an order object for each item on the menu, we will only display
+      those where the number ordered is greater than 1 */
+    menuArray.forEach(item => {
+        orderedItems.push(new Order (item.id, item.name, item.price));
+    })
+
+    discounts.push(new Discount(0, "10% off $30 spend", 10, "percent", 30));
+    discounts.push(new Discount(1, "15% off $40 spend", 15, "percent", 40));
+    discounts.push(new Discount(2, "$10 off $50 spend", 10, "value", 50));
+
+    confirmationContainerEl[0].style.display = "none";
+
+    for (let element of tipEls) {
+        element.classList.remove("tips-selected");
+    };
 }
 
 renderFoodItems();

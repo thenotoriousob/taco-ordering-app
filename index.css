@@ -177,6 +177,29 @@ header {
     font-family: 'Verdana', sans-serif;
 }
 
+.tips-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75em;
+    gap: 0.5em;
+}
+
+.tips {
+    padding: 1.5em;
+    background-color: lightgreen;
+    border: 1px solid #16DB99;
+    border-radius: 4px;
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tips-selected,
+.tips:focus {
+    background-color: #16DB99;
+    color: #FFFFFF;
+}
+
 
 /* Payment form styling */
 .payment-container {
@@ -271,13 +294,6 @@ input {
    of the currently hovered star. */
 .rate span, .rate span:hover ~ span {
     color: #222;
-    /* text-shadow: none;
-    transition: color 200ms,
-                text-shadow 200ms; */
-    /* This will remove the delay when
-       moving the cursor left or right
-       within the set of stars. */
-    /* transition-delay: 0; */
 }
   
 .rate:hover span {
@@ -304,9 +320,7 @@ input {
 .rate:hover span:nth-child(5) {
     transition-delay: 120ms;
 }
-  
-  /* Miscellaneous styles. */
+
 .rate span {
     cursor: pointer;
-    font-style: normal;
 }
