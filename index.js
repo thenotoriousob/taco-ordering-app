@@ -118,7 +118,7 @@ function handleReviewClick(stars) {
 
     console.log(`A ${stars} start review has been sent to TrustPilot`);
 
-    resetForm();
+    initialiseForm();
 }
 
 function hasQualifiedForDiscount(totalPrice) {
@@ -227,7 +227,7 @@ function renderConfirmationMessage(name) {
     orderNameEl.innerText = name;
 }
 
-function resetForm() {
+function initialiseForm() {
 
     orderedItems.length = 0;
     discounts.length = 0;
@@ -251,6 +251,6 @@ function resetForm() {
     };
 }
 
-resetForm();
+initialiseForm();
 
 renderMenuItems();
