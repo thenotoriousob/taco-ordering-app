@@ -13,6 +13,8 @@
     --confirmation-background-color: #ECFDF5;
     --confirmation-color: #065F46;
     --standard-border-radius: 4px;
+    --unselected-star-color: #222;
+    --selected-star-color: #fc0;
 }
 
 *,
@@ -263,8 +265,9 @@ header {
     color: var(--white-color);
 }
 
+/* Order styling - Start */
 
-/* Payment form styling */
+/* Payment form styling - Start */
 .payment-container {
     padding: 1.5em;
     margin: auto;
@@ -300,7 +303,9 @@ input {
     padding: 1.2em;
 }
 
-/* Confirmation styling */
+/* Payment form styling - End */
+
+/* Confirmation styling - Start */
 .confirmation-container {
     margin: 0 auto 3rem;
     background-color: var(--confirmation-background-color);
@@ -313,16 +318,22 @@ input {
     margin-bottom: 1em;
 }
 
+/* Confirmation styling - End */
+
 /******* I googled the effect for this ********/
 
-/* These styles are applied by default. They will also override the hover
-   style for all stars to the right of the currently hovered star. */
+/* These notes are for my own benefit :)
+
+~ - subsequent-sibling combinator
+
+.rate span:hover ~ span - all span elements that are siblings of the current
+                          .rate span:hover and that come after the current element being hovered */
 .rate span, .rate span:hover ~ span {
-    color: #222;
+    color: var(--unselected-star-color);
 }
   
 .rate:hover span {
-    color: #fc0;
+    color: var(--selected-star-color);
 }
   
 /* Make the effect apply one star at a time. Limiting the selector to when
@@ -343,7 +354,3 @@ input {
 .rate:hover span:nth-child(5) {
     transition-delay: 120ms;
 }
-
-/* .rate span {
-    cursor: pointer;
-} */
