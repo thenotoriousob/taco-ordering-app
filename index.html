@@ -27,28 +27,28 @@
                     <div class="order-item-container" id="ordered-items">
                         <!-- Rendered from JS -->
                     </div>
-                    <div class="total-price-container">
+                    <div class="total-price-card">
                         <p class="order-label">Total price:</p>
                         <p class="order-price" id="total-price">$0</p>
                     </div>
                     <div class="tips-container">
-                        <div class="tips" tabindex="1" id="notip">No tip</div>
-                        <div class="tips" tabindex="1" id="10%">10%</div>
-                        <div class="tips" tabindex="1" id="15%">15%</div>
-                        <div class="tips" tabindex="1" id="20%">20%</div>
+                        <div class="btn tips" data-tip="0">No tip</div>
+                        <div class="btn tips" data-tip="10">10%</div>
+                        <div class="btn tips" data-tip="15">15%</div>
+                        <div class="btn tips" data-tip="20">20%</div>
                     </div>
-                    <button type="button" class="complete-order-btn" id="complete-order-btn">Complete Order</button>
+                    <button type="button" class="btn complete-order-btn" id="complete-order-btn">Complete Order</button>
                 </section>
                 <section class="confirmation-container">
                     <p class="confirmation-text">Thanks, <span id="order-name"></span>! Your order is on its way!</p>
                     <p class="rating-text">Please rate your experience with us and help us improve</p>  
                     <div class="review-stars">
                         <span class="rate">
-                            <span class="stars" id="1star">★</span>
-                            <span class="stars" id="2stars">★</span>
-                            <span class="stars" id="3stars">★</span>
-                            <span class="stars" id="4stars">★</span>
-                            <span class="stars" id="5stars">★</span>
+                            <span class="btn stars" data-review="1">★</span>
+                            <span class="btn stars" data-review="2">★</span>
+                            <span class="btn stars" data-review="3">★</span>
+                            <span class="btn stars" data-review="4">★</span>
+                            <span class="btn stars" data-review="5">★</span>
                         </span>
                     </div>
                 </section>

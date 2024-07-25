@@ -1,3 +1,20 @@
+:root {
+    --main-font-family: "Smythe", sans-serif;
+    --secondary-font-family: "Verdana", sans-serif;
+    --button-background-color: #16DB99;
+    --item-border-separator: #D2D2D2;
+    --item-ingredients-color: #8B8B8B;
+    --white-color: #FFFFFF;
+    --light-grey-color: #BBBBBB;
+    --add-item-border-color: #DEDEDE;
+    --add-item-color: #3C3C3C;
+    --total-separator-color: #393333;
+    --input-border-color: #757575;
+    --confirmation-background-color: #ECFDF5;
+    --confirmation-color: #065F46;
+    --standard-border-radius: 4px;
+}
+
 *,
 *::before,
 *::after {
@@ -5,20 +22,22 @@
     margin: 0;
 }
 
+/* Generic styling */
+
 body {
-    font-family: "Smythe", sans-serif;
+    font-family: var(--main-font-family);
+    color: #000000;
 }
 
 p, input {
     line-height: 1.5;
 }
 
-button {
+.btn {
     cursor: pointer;
 }
 
 .container {
-    width: 90%;
     max-width: 600px;
     min-width: 350px;
     margin: 0 auto;
@@ -27,182 +46,227 @@ button {
     padding-top: 1px;
 }
 
-/* Header styling */
-header {
-    background-image: url('./images/amie-watson-qeVpw7i2Wi0-unsplash.jpg');
-    background-size: cover;
-    background-position: center;
-    min-height: 200px;
-    padding: 1px;
-    color: #FFFFFF;
-    /* text-shadow: 0.07em 0 black,
-                  0 0.07em black,
-                  -0.07em 0 black,
-                  0 -0.07em black; */
-                  text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-
+.container,
+.item-container,
+.order-container,
+.payment-container,
+.confirmation-container {
+    width: 90%;
 }
 
-.header-container {
-    margin-top: 1.2em;
+.item-card,
+.order-item-card,
+.total-price-card,
+.complete-order-btn {
+    width: 100%;
+}
+
+.confirmation-container,
+.header-container,
+.tips-container,
+.payment-header,
+.confirmation-container,
+.order-container {
     text-align: center;
 }
 
-.company-header {
-    font-size: 6rem;
-    margin: 0;
+.order-container,
+.payment-container,
+.confirmation-container {
+    display: none;
 }
 
-.company-slogan {
-    font-size: 2rem;
+.order-item-card,
+.item-card,
+.order-item-card,
+.total-price-card,
+.tips-container,
+form {
+    display: flex;
+    justify-content: space-between;
+    
 }
 
-/* Item styling */
-.item-container {
+.tips,
+.payment-container,
+input,
+.pay-btn,
+.confirmation-container {
+    border-radius: var(--standard-border-radius);
+}
+
+.item-container,
+.order-container {
     margin: 0 auto 3em;
 }
 
-.item-card {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    color: #000000;
-    border-bottom: 1px solid #D2D2D2;
-    width: 90%;
-    padding-top: 3em;
-    padding-bottom: 3em;
+/* Typography - Start */
+.company-header {
+    font-size: 6rem;
 }
 
 .item-graphic {
     font-size: 5rem;
 }
 
-.item-example-image {
-    width: 60px;
-    height: 60px;
+.review-stars {
+    font-size: 3rem;
 }
 
-.item-information {
-    width: 80%;
-    margin-left: 2em;
+.company-slogan,
+.add-item-btn {
+    font-size: 2rem;
 }
 
-.item-name {
+.item-name,
+.order-header,
+.order-item-card,
+.total-price-card,
+.confirmation-text {
     font-size: 1.75rem;
 }
 
-.item-ingredients {
-    color: #8B8B8B;
+.payment-header {
+    font-size: 1.5rem;
 }
 
-.item-price {
+.item-price,
+.pay-btn,
+input,
+.rating-text {
     font-size: 1.25rem;
 }
 
-.item-btn {
-    border-radius: 50px;
-    width: 50px;
-    height: 50px;
-    font-size: 32px;
-    font-weight: 200;
-    border: 1.5px solid #DEDEDE;
-    color: #3C3C3C;
-    background-color: #FFFFFF;
-}
-
-/* Order styling */
-.order-container {
-    display: none;
-    width: 90%;
-    margin: 0 auto 3em;
-}
-
-.order-header {
-    font-size: 1.75rem;
-    margin-bottom: 2.25em;
-    text-align: center;
-}
-
-.order-item-container {
-  border-bottom: 2px solid #393333;
-  padding-bottom: 2em;
-}
-
-.order-item-card {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 1.75rem;
+.complete-order-btn,
+.tips {
+    font-size: 1rem;
 }
 
 .remove-order-btn {
-  border: 0;
-  color: #BBBBBB;
-  background-color: #FFFFFF;
-  font-size: 0.75rem;
-  font-family: 'Verdana', sans-serif;
-  margin-right: auto;
+    font-size: 0.75rem;
 }
 
-.total-price-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 1.75rem;
+.remove-order-btn,
+.complete-order-btn,
+.tips,
+.payment-container,
+.pay-btn
+input {
+    font-family: var(--secondary-font-family);
+}
+
+/* Typography - End */
+
+/* Header styling - Start */
+header {
+    background-image: url('./images/amie-watson-qeVpw7i2Wi0-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+    padding: 1px;
+    color: var(--white-color);
+    text-shadow:  0.05em 0 black,
+                  0 0.05em black,
+                  -0.05em 0 black,
+                  0 -0.05em black,
+                  -0.05em -0.05em black,
+                  -0.05em 0.05em black,
+                  0.05em -0.05em black,
+                  0.05em 0.05em black;
+
+}
+
+.header-container {
+    margin-top: 1.2em;
+}
+
+.company-header {
+    margin: 0;
+}
+
+/* Header styling - End */
+
+/* Item styling - Start */
+.item-card {
+    align-items: center;
+    border-bottom: 1px solid var(--item-border-separator);
+    padding: 3em 0;
+}
+
+.item-details {
+    /* Don't shrink to fit the content */
+    width: 70%;
+    margin-left: 1em;
+}
+
+.item-ingredients {
+    color: var(--item-ingredients-color);
+}
+
+.add-item-btn {
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    font-weight: 200;
+    border: 1.5px solid var(--add-item-border-color);
+    color: var(--add-item-color);
+    background-color: var(--white-color);
+}
+
+/* Item styling - End */
+
+/* Order styling - Start */
+.order-header {
+    margin-bottom: 2.25em;
+}
+
+.order-item-container {
+    border-bottom: 2px solid var(--total-separator-color);
+    padding-bottom: 2em;
+}
+
+.remove-order-btn {
+    border: 0;
+    color: var(--light-grey-color);
+    background-color: var(--white-color);
+    /* Position button to the left */
+    margin-right: auto;
+}
+
+.total-price-card {
     margin: 0.5em 0 1.75em;
 }
 
 .complete-order-btn {
-    width: 100%;
-    background-color: #16DB99;
-    color: #FFFFFF;
+    background-color: var(--button-background-color);
+    color: var(--white-color);
     font-weight: 700;
     border: 0;
     padding: 1.5em;
-    border-radius: 3px;
-    font-family: 'Verdana', sans-serif;
-    font-size: 1rem;
 }
 
 .tips-container {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 0.75em;
     gap: 0.5em;
 }
 
 .tips {
-    font-size: 1rem;
     padding: 1.5em;
-    background-color: #BBBBBB;
-    border-radius: 4px;
+    background-color: var(--light-grey-color);
     width: 20%;
-    text-align: center;
-    cursor: pointer;
-    font-family: 'Verdana', sans-serif;
-    color: #FFFFFF;
+    color: var(--white-color);
 }
 
 .tips-selected,
 .tips:hover {
-    background-color: #16DB99;
-    color: #FFFFFF;
+    background-color: var(--button-background-color);
+    color: var(--white-color);
 }
 
 
 /* Payment form styling */
 .payment-container {
-    display: none;
     padding: 1.5em;
-    width: 90%;
     margin: auto;
     max-width: 575px;
     height: fit-content;
@@ -211,72 +275,48 @@ header {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #FFFFFF;
+    background-color: var(--white-color);
     box-shadow: 0 0 200px 50px rgba(0,0,0,.5);
-    border-radius: 4px;
-    font-family: 'Verdana', sans-serif;
 }
 
 .payment-header {
-    font-size: 1.5rem;
     margin-bottom: 2em;
-    text-align: center;
 }
 
 form {
-    display: flex;
     flex-direction: column;
 }
 
 input {
-    border: 1.3px solid #757575;
+    border: 1.3px solid var(--input-border-color);
     padding: 1em 1.5em 1em 1.5em;
-    border-radius: 4px;
     margin-bottom: 1.5em;
-    font-family: 'Verdana', sans-serif;
-    font-size: 1.25em;
 }
 
 .pay-btn {
-    background-color: #16DB99;
-    color: #FFFFFF;
-    font-family: 'Verdana', sans-serif;
-    font-size: 1.25rem;
+    background-color: var(--button-background-color);
+    color: var(--white-color);
     border: 0;
-    border-radius: 4px;
     padding: 1.2em;
 }
 
 /* Confirmation styling */
 .confirmation-container {
-    display: none;
-    width: 90%;
     margin: 0 auto 3rem;
-    background-color: #ECFDF5;
-    color: #065F46;
+    background-color: var(--confirmation-background-color);
+    color: var(--confirmation-color);
     padding: 3em;
-    border-radius: 3px;
-    text-align: center;
-}
-
-.confirmation-text {
-    font-size: 1.75rem;
 }
 
 .rating-text {
-    font-size: 1.25rem;
     margin-top: 1em;
     margin-bottom: 1em;
 }
 
-.review-stars {
-    font-size: 3rem;
-}
+/******* I googled the effect for this ********/
 
-/* These styles are applied by default.
-   They will also override the hover
-   style for all stars to the right
-   of the currently hovered star. */
+/* These styles are applied by default. They will also override the hover
+   style for all stars to the right of the currently hovered star. */
 .rate span, .rate span:hover ~ span {
     color: #222;
 }
@@ -285,10 +325,8 @@ input {
     color: #fc0;
 }
   
-  /* Make the effect apply one star at a
-     time. Limiting the selector to when
-     .rate is hovered removes the effect
-     without delay when cursor leaves
+/* Make the effect apply one star at a time. Limiting the selector to when
+   .rate is hovered removes the effect without delay when cursor leaves
      the .rate area. */
 .rate:hover span:nth-child(2) {
     transition-delay: 30ms;
@@ -306,6 +344,6 @@ input {
     transition-delay: 120ms;
 }
 
-.rate span {
+/* .rate span {
     cursor: pointer;
-}
+} */
