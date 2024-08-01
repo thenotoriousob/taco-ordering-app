@@ -116,7 +116,7 @@ function handlePaymentSubmit() {
 
 function handleReviewClick(stars) {
 
-    console.log(`A ${stars} start review has been sent to TrustPilot`);
+    console.log(`A ${stars} star review has been sent to TrustPilot`);
 
     initialiseForm();
 }
@@ -210,7 +210,7 @@ function renderMenuItems() {
                     <p class="item-ingredients">${item.ingredients.join(", ")}</p>
                     <p class="item-price">$${item.price}</p>
                 </div>
-                <button class="btn add-item-btn" data-add-item="${item.id}">+</button>
+                <button class="btn add-item-btn" data-add-item="${item.id}"><span class="add-item-icon">+</span></button>
             </div>
             `;
     })

@@ -206,13 +206,33 @@ header {
 }
 
 .add-item-btn {
-    border-radius: 50px;
+    position: relative;
+    border-radius: 100%;
     width: 50px;
     height: 50px;
+    padding: 7.5px 15px;
     font-weight: 200;
     border: 1.5px solid var(--add-item-border-color);
     color: var(--add-item-color);
     background-color: var(--white-color);
+}
+
+.add-item-btn:hover,
+.add-item-btn:focus {
+    border: 1px solid var(--button-background-color);
+    color: var(--button-background-color);
+    outline: 0;
+}
+
+.add-item-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* Needed so it triggers the onclick of the parent (add button) */
+    pointer-events: none;
 }
 
 /* Item styling - End */
