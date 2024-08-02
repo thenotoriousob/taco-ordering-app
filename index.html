@@ -3,6 +3,7 @@
     <head>
         <title>Taco App</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
@@ -20,7 +21,17 @@
           <main>
             <div class="container">
                 <section class="item-container" id="food-items">
-                    <!-- Rendered from JS -->
+                    <template id="menu-items-template">
+                        <div class="item-card" >
+                            <p class="item-graphic"></p>
+                            <div class="item-details">
+                                <h2 class="item-name"></h2>
+                                <p class="item-ingredients"></p>
+                                <p class="item-price"></p>
+                            </div>
+                            <button class="btn add-item-btn" data-add-item="">+</button>
+                        </div>
+                    </template>
                 </section>
                 <section class="order-container">
                     <h2 class="order-header">Your order</h2>
@@ -58,8 +69,8 @@
             <h2 class="payment-header">Enter card details</h2>
             <form id="payment-form">
                 <input type="input" name="name" placeholder="Enter your name" required>
-                <input type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" name="card" placeholder="Enter your number" required>
-                <input type="tel" name="ccv" inputmode="numeric" pattern="[0-9\s]{3}" placeholder="Enter your CVV" maxlength="3" required>
+                <input type="tel" inputmode="numeric" pattern="[0-9\s]{16,19}" maxlength="19" name="card" placeholder="Enter your number" required>
+                <input type="tel" name="ccv" inputmode="numeric" pattern="[0-9]{3}" placeholder="Enter your CVV" maxlength="3" required>
                 <button class="pay-btn">Pay</button>
             </form>
         </div>

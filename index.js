@@ -44,11 +44,11 @@ function Order(id, name, price) {
     this.ordered = 0
     this.incrementOrdered = function() {
         this.ordered++;
-    }
+    };
     this.decrementOrdered = function() {
       this.ordered--;
-  }
-}
+  };
+};
 
 function Discount(id, name, discount, type, qualifyingTotal) {
     this.id = id
@@ -60,7 +60,7 @@ function Discount(id, name, discount, type, qualifyingTotal) {
     this.setTotalDiscount = function(totalDiscount) {
       this.totalDiscount = totalDiscount; // Seemed to treat it as a string without this
   };
-}
+};
 
 function handleAddItemClick(itemId) {
 
@@ -69,7 +69,7 @@ function handleAddItemClick(itemId) {
     orderedItem.incrementOrdered();
 
     renderOrderedItems();
-}
+};
 
 function handleRemoveItemClick(itemId) {
 
@@ -78,7 +78,7 @@ function handleRemoveItemClick(itemId) {
     orderedItem.decrementOrdered();
 
     renderOrderedItems();
-}
+};
 
 function handleTipClick(tipPercentage) {
 
@@ -92,11 +92,11 @@ function handleTipClick(tipPercentage) {
     selectedTip = tipPercentage;
 
     renderOrderedItems();
-}
+};
 
 function handleCompleteOrderClick() {
     paymentModal.style.display = "block";
-}
+};
 
 function handlePaymentSubmit() {
 
@@ -112,14 +112,14 @@ function handlePaymentSubmit() {
     payForm.reset();
 
     renderConfirmationMessage(name);
-}
+};
 
 function handleReviewClick(stars) {
 
     console.log(`A ${stars} star review has been sent to TrustPilot`);
 
     initialiseForm();
-}
+};
 
 function hasQualifiedForDiscount(totalPrice) {
 
@@ -138,7 +138,7 @@ function hasQualifiedForDiscount(totalPrice) {
             return true;
         }
     });
-}
+};
 
 function renderOrderedItems() {
 
@@ -172,50 +172,54 @@ function renderOrderedItems() {
     if (!itemOrdered) {
           orderContainerEl[0].style.display = "none";        
     } else {
-          const totalPrice = orderedItems.reduce((total, currentItem) => {
+
+        const totalPrice = orderedItems.reduce((total, currentItem) => {
               return total + (currentItem.price * currentItem.ordered);
-      },0);
+        },0);
 
-      const qualifiedDiscount = hasQualifiedForDiscount(totalPrice);
+        const qualifiedDiscount = hasQualifiedForDiscount(totalPrice);
 
-      if (qualifiedDiscount) {
-          orderedItemsEl.innerHTML += 
-          `
-          <div class="order-item-card">
-              <p class="order-label">${qualifiedDiscount.name}</p>
-              <p class="order-price">$${qualifiedDiscount.totalDiscount.toFixed(2)}</p>
-          </div>
-          `;
-          totalDiscount = qualifiedDiscount.totalDiscount;
-      }
+        if (qualifiedDiscount) {
+            orderedItemsEl.innerHTML += 
+            `
+            <div class="order-item-card">
+                <p class="order-label">${qualifiedDiscount.name}</p>
+                <p class="order-price">$${qualifiedDiscount.totalDiscount.toFixed(2)}</p>
+            </div>
+            `;
+            totalDiscount = qualifiedDiscount.totalDiscount;
+        }
 
-      const tip = ((totalPrice + totalDiscount) / 100) * selectedTip;
+        const tip = ((totalPrice + totalDiscount) / 100) * selectedTip;
 
-      orderContainerEl[0].style.display = "block";
-      totalPriceEl.innerText = `$${(totalPrice + totalDiscount + tip).toFixed(2)}`;
+        orderContainerEl[0].style.display = "block";
+        totalPriceEl.innerText = `$${(totalPrice + totalDiscount + tip).toFixed(2)}`;
     }
 
-}
+};
 
 function renderMenuItems() {
 
     const foodItemsEl = document.getElementById("food-items");
+    const templateEl = document.getElementById("menu-items-template");
 
-    menuArray.forEach(item => {
-        foodItemsEl.innerHTML += `
-            <div class="item-card" >
-                <p class="item-graphic">${item.emoji}</p>
-                <div class="item-details">
-                    <h2 class="item-name">${item.name}</h2>
-                    <p class="item-ingredients">${item.ingredients.join(", ")}</p>
-                    <p class="item-price">$${item.price}</p>
-                </div>
-                <button class="btn add-item-btn" data-add-item="${item.id}"><span class="add-item-icon">+</span></button>
-            </div>
-            `;
-    })
+    menuArray.forEach((item) => {
 
-}
+      const { emoji, name, ingredients, price, id } = item;
+
+      let clonedTemplate = templateEl.content.cloneNode(true);
+
+      clonedTemplate.querySelector('.item-graphic').textContent = emoji;
+      clonedTemplate.querySelector('.item-name').textContent = name;
+      clonedTemplate.querySelector('.item-ingredients').textContent = ingredients.join(", ");
+      clonedTemplate.querySelector('.item-price').textContent = `$${price}`;
+      clonedTemplate.querySelector('.add-item-btn').dataset.addItem = id;
+
+      foodItemsEl.append(clonedTemplate);
+      
+    });
+
+};
 
 function renderConfirmationMessage(name) {
 
@@ -225,7 +229,7 @@ function renderConfirmationMessage(name) {
     orderContainerEl[0].style.display = "none";
     confirmationContainerEl[0].style.display = "block";
     orderNameEl.innerText = name;
-}
+};
 
 function initialiseForm() {
 
@@ -249,7 +253,7 @@ function initialiseForm() {
     for (let element of tipEls) {
         element.classList.remove("tips-selected");
     };
-}
+};
 
 initialiseForm();
 
